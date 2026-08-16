@@ -1,0 +1,187 @@
+{
+    "simulation_time": 480.0,
+    "period": "EVENING_PEAK",
+    "intersections": {
+        "INT_NW": {
+            "signal_phase": 0,
+            "phase_state": "GGGGggrrrrrrGGGggrrrrr",
+            "phase_remaining": 46.0,
+            "north": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "N1_NW"
+            },
+            "south": {
+                "vehicles": 16,
+                "queue": 9,
+                "waiting_time": 5.69,
+                "speed": 3.22,
+                "speed_kmh": 11.59,
+                "traffic_flow": 0,
+                "congestion": "HIGH",
+                "edge_id": "SW_NW"
+            },
+            "east": {
+                "vehicles": 6,
+                "queue": 3,
+                "waiting_time": 1.67,
+                "speed": 0.14,
+                "speed_kmh": 0.5,
+                "traffic_flow": 0,
+                "congestion": "MEDIUM",
+                "edge_id": "NE_NW"
+            },
+            "west": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "W1_NW"
+            }
+        },
+        "INT_NE": {
+            "signal_phase": 0,
+            "phase_state": "rrrrrrGGGggrrrrrGGGGgg",
+            "phase_remaining": 0.0,
+            "north": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "N2_NE"
+            },
+            "south": {
+                "vehicles": 3,
+                "queue": 3,
+                "waiting_time": 6.0,
+                "speed": 0.0,
+                "speed_kmh": 0.0,
+                "traffic_flow": 0,
+                "congestion": "MEDIUM",
+                "edge_id": "SE_NE"
+            },
+            "east": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "E1_NE"
+            },
+            "west": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "NW_NE"
+            }
+        },
+        "INT_SW": {
+            "signal_phase": 1,
+            "phase_state": "yyyggrrrrrryyyyggrrrrr",
+            "phase_remaining": 1.0,
+            "north": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "NW_SW"
+            },
+            "south": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "S1_SW"
+            },
+            "east": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "SE_SW"
+            },
+            "west": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "W2_SW"
+            }
+        },
+        "INT_SE": {
+            "signal_phase": 0,
+            "phase_state": "GGGggrrrrrGGGGggrrrrrr",
+            "phase_remaining": 0.0,
+            "north": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "NE_SE"
+            },
+            "south": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "S2_SE"
+            },
+            "east": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "E2_SE"
+            },
+            "west": {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 13.89,
+                "speed_kmh": 50.0,
+                "traffic_flow": 0,
+                "congestion": "LOW",
+                "edge_id": "SW_SE"
+            }
+        }
+    },
+    "emergency_vehicles": []
+}

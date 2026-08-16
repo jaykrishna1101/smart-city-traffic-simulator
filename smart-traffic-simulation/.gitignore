@@ -1,0 +1,11 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# SUMO runtime generated outputs
+output/*.xml
+!output/.gitkeep
+
+# Operating system files
+.DS_Store
+Thumbs.db

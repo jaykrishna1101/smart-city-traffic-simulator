@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <!-- Inbound Arterial Routes (West/North to East/South) -->
+    <route id="r_W1_E1" edges="W1_NW NW_NE NE_E1"/>
+    <route id="r_W1_E2" edges="W1_NW NW_SW SW_SE SE_E2"/>
+    <route id="r_W1_S1" edges="W1_NW NW_SW SW_S1"/>
+    <route id="r_W1_S2" edges="W1_NW NW_NE NE_SE SE_S2"/>
+
+    <route id="r_W2_E1" edges="W2_SW SW_NW NW_NE NE_E1"/>
+    <route id="r_W2_E2" edges="W2_SW SW_SE SE_E2"/>
+    <route id="r_W2_S1" edges="W2_SW SW_S1"/>
+    <route id="r_W2_S2" edges="W2_SW SW_SE SE_S2"/>
+
+    <route id="r_N1_S1" edges="N1_NW NW_SW SW_S1"/>
+    <route id="r_N1_S2" edges="N1_NW NW_NE NE_SE SE_S2"/>
+    <route id="r_N1_E1" edges="N1_NW NW_NE NE_E1"/>
+    <route id="r_N1_E2" edges="N1_NW NW_SW SW_SE SE_E2"/>
+
+    <route id="r_N2_S1" edges="N2_NE NE_NW NW_SW SW_S1"/>
+    <route id="r_N2_S2" edges="N2_NE NE_SE SE_S2"/>
+    <route id="r_N2_E1" edges="N2_NE NE_E1"/>
+    <route id="r_N2_E2" edges="N2_NE NE_SE SE_E2"/>
+
+    <!-- Outbound Arterial Routes (East/South to West/North) -->
+    <route id="r_E1_W1" edges="E1_NE NE_NW NW_W1"/>
+    <route id="r_E1_W2" edges="E1_NE NE_SE SE_SW SW_W2"/>
+    <route id="r_E1_N1" edges="E1_NE NE_NW NW_N1"/>
+    <route id="r_E1_N2" edges="E1_NE NE_N2"/>
+
+    <route id="r_E2_W1" edges="E2_SE SE_NE NE_NW NW_W1"/>
+    <route id="r_E2_W2" edges="E2_SE SE_SW SW_W2"/>
+    <route id="r_E2_N1" edges="E2_SE SE_NE NE_NW NW_N1"/>
+    <route id="r_E2_N2" edges="E2_SE SE_NE NE_N2"/>
+
+    <route id="r_S1_N1" edges="S1_SW SW_NW NW_N1"/>
+    <route id="r_S1_N2" edges="S1_SW SW_SE SE_NE NE_N2"/>
+    <route id="r_S1_W1" edges="S1_SW SW_NW NW_W1"/>
+    <route id="r_S1_W2" edges="S1_SW SW_W2"/>
+
+    <route id="r_S2_N1" edges="S2_SE SE_SW SW_NW NW_N1"/>
+    <route id="r_S2_N2" edges="S2_SE SE_NE NE_N2"/>
+    <route id="r_S2_W1" edges="S2_SE SE_SW SW_NW NW_W1"/>
+    <route id="r_S2_W2" edges="S2_SE SE_SW SW_W2"/>
+
+    <!-- ======================================================= -->
+    <!-- CHRONOLOGICALLY SORTED TRAFFIC FLOWS & VEHICLE INSERTS   -->
+    <!-- ======================================================= -->
+
+    <!-- [t = 0s] MORNING PEAK (Heavy Inbound Commute - Multi Vehicle Types) -->
+    <flow id="f_m_car_W1_E1" type="passenger_car" route="r_W1_E1" begin="0" end="180" vehsPerHour="350"/>
+    <flow id="f_m_hatch_W1_E1" type="hatchback" route="r_W1_E1" begin="0" end="180" vehsPerHour="250"/>
+    <flow id="f_m_sedan_W1_S1" type="sedan" route="r_W1_S1" begin="0" end="180" vehsPerHour="400"/>
+    <flow id="f_m_moto_W1_S1" type="motorcycle" route="r_W1_S1" begin="0" end="180" vehsPerHour="100"/>
+
+    <flow id="f_m_car_W2_E2" type="passenger_car" route="r_W2_E2" begin="0" end="180" vehsPerHour="400"/>
+    <flow id="f_m_truck_W2_E2" type="truck" route="r_W2_E2" begin="0" end="180" vehsPerHour="80"/>
+
+    <flow id="f_m_sedan_N1_S1" type="sedan" route="r_N1_S1" begin="0" end="180" vehsPerHour="450"/>
+    <flow id="f_m_hatch_N1_S1" type="hatchback" route="r_N1_S1" begin="0" end="180" vehsPerHour="250"/>
+
+    <flow id="f_m_car_N1_E2" type="passenger_car" route="r_N1_E2" begin="0" end="180" vehsPerHour="350"/>
+    <flow id="f_m_moto_N1_E2" type="motorcycle" route="r_N1_E2" begin="0" end="180" vehsPerHour="100"/>
+
+    <flow id="f_m_sedan_N2_S2" type="sedan" route="r_N2_S2" begin="0" end="180" vehsPerHour="550"/>
+    <flow id="f_m_truck_N2_S2" type="truck" route="r_N2_S2" begin="0" end="180" vehsPerHour="100"/>
+
+    <flow id="f_m_car_E1_W1" type="passenger_car" route="r_E1_W1" begin="0" end="180" vehsPerHour="150"/>
+    <flow id="f_m_car_S1_N1" type="passenger_car" route="r_S1_N1" begin="0" end="180" vehsPerHour="150"/>
+
+    <!-- [t = 10s - 20s] Morning Buses -->
+    <flow id="f_m_bus_W1_E1" type="bus" route="r_W1_E1" begin="10" end="170" period="35"/>
+    <flow id="f_m_bus_N1_S1" type="bus" route="r_N1_S1" begin="20" end="170" period="40"/>
+
+    <!-- [t = 60s] Emergency Ambulance 01 (North to South) -->
+    <vehicle id="AMBULANCE_01" type="ambulance" route="r_N1_S1" depart="60" color="255,0,0"/>
+
+    <!-- [t = 140s] Emergency Fire Truck 01 (West to East) -->
+    <vehicle id="FIRE_TRUCK_01" type="fire_truck" route="r_W1_E1" depart="140" color="255,0,0"/>
+
+    <!-- [t = 180s] NORMAL PERIOD (Balanced Moderate Multi-Modal Traffic) -->
+    <flow id="f_n_car_W1_E1" type="passenger_car" route="r_W1_E1" begin="180" end="240" vehsPerHour="200"/>
+    <flow id="f_n_hatch_W1_E1" type="hatchback" route="r_W1_E1" begin="180" end="240" vehsPerHour="100"/>
+    <flow id="f_n_sedan_E1_W1" type="sedan" route="r_E1_W1" begin="180" end="240" vehsPerHour="200"/>
+    <flow id="f_n_moto_E1_W1" type="motorcycle" route="r_E1_W1" begin="180" end="240" vehsPerHour="100"/>
+
+    <flow id="f_n_car_N1_S1" type="passenger_car" route="r_N1_S1" begin="180" end="240" vehsPerHour="200"/>
+    <flow id="f_n_sedan_S1_N1" type="sedan" route="r_S1_N1" begin="180" end="240" vehsPerHour="200"/>
+    <flow id="f_n_car_W2_S2" type="passenger_car" route="r_W2_S2" begin="180" end="240" vehsPerHour="200"/>
+    <flow id="f_n_truck_W2_S2" type="truck" route="r_W2_S2" begin="180" end="240" vehsPerHour="50"/>
+
+    <flow id="f_n_sedan_E2_N2" type="sedan" route="r_E2_N2" begin="180" end="240" vehsPerHour="200"/>
+    <flow id="f_n_bus_W2_E2" type="bus" route="r_W2_E2" begin="185" end="235" period="50"/>
+
+    <!-- [t = 220s] Emergency Police Vehicle 01 (South to North) -->
+    <vehicle id="POLICE_01" type="police" route="r_S1_N1" depart="220" color="0,0,255"/>
+
+    <!-- [t = 240s] EVENING PEAK (Heavy Outbound Commute - Multi Vehicle Types) -->
+    <flow id="f_e_sedan_E1_W1" type="sedan" route="r_E1_W1" begin="240" end="420" vehsPerHour="400"/>
+    <flow id="f_e_hatch_E1_W1" type="hatchback" route="r_E1_W1" begin="240" end="420" vehsPerHour="250"/>
+    <flow id="f_e_car_E2_W2" type="passenger_car" route="r_E2_W2" begin="240" end="420" vehsPerHour="500"/>
+    <flow id="f_e_moto_E2_W2" type="motorcycle" route="r_E2_W2" begin="240" end="420" vehsPerHour="100"/>
+
+    <flow id="f_e_sedan_S1_N1" type="sedan" route="r_S1_N1" begin="240" end="420" vehsPerHour="500"/>
+    <flow id="f_e_hatch_S1_N1" type="hatchback" route="r_S1_N1" begin="240" end="420" vehsPerHour="250"/>
+    <flow id="f_e_car_S2_N2" type="passenger_car" route="r_S2_N2" begin="240" end="420" vehsPerHour="450"/>
+    <flow id="f_e_truck_S2_N2" type="truck" route="r_S2_N2" begin="240" end="420" vehsPerHour="100"/>
+
+    <flow id="f_e_car_E1_N1" type="passenger_car" route="r_E1_N1" begin="240" end="420" vehsPerHour="300"/>
+    <flow id="f_e_moto_E1_N1" type="motorcycle" route="r_E1_N1" begin="240" end="420" vehsPerHour="100"/>
+
+    <flow id="f_e_sedan_S2_W1" type="sedan" route="r_S2_W1" begin="240" end="420" vehsPerHour="450"/>
+    <flow id="f_e_car_W1_E1" type="passenger_car" route="r_W1_E1" begin="240" end="420" vehsPerHour="150"/>
+    <flow id="f_e_car_N1_S1" type="passenger_car" route="r_N1_S1" begin="240" end="420" vehsPerHour="150"/>
+
+    <!-- [t = 250s - 260s] Evening Buses -->
+    <flow id="f_e_bus_E1_W1" type="bus" route="r_E1_W1" begin="250" end="410" period="35"/>
+    <flow id="f_e_bus_S1_N1" type="bus" route="r_S1_N1" begin="260" end="410" period="40"/>
+
+    <!-- [t = 300s] Emergency Ambulance 02 (East to West) -->
+    <vehicle id="AMBULANCE_02" type="ambulance" route="r_E1_W1" depart="300" color="255,0,0"/>
+</routes>

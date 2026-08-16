@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/nodes_file.xsd">
+    <!-- Traffic light controlled main grid intersections -->
+    <node id="INT_NW" x="0.0" y="300.0" type="traffic_light"/>
+    <node id="INT_NE" x="300.0" y="300.0" type="traffic_light"/>
+    <node id="INT_SW" x="0.0" y="0.0" type="traffic_light"/>
+    <node id="INT_SE" x="300.0" y="0.0" type="traffic_light"/>
+
+    <!-- Outer boundary source and sink nodes -->
+    <node id="N1" x="0.0" y="600.0" type="priority"/>
+    <node id="N2" x="300.0" y="600.0" type="priority"/>
+    <node id="S1" x="0.0" y="-300.0" type="priority"/>
+    <node id="S2" x="300.0" y="-300.0" type="priority"/>
+    <node id="W1" x="-300.0" y="300.0" type="priority"/>
+    <node id="W2" x="-300.0" y="0.0" type="priority"/>
+    <node id="E1" x="600.0" y="300.0" type="priority"/>
+    <node id="E2" x="600.0" y="0.0" type="priority"/>
+</nodes>

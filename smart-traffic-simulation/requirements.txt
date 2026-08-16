@@ -1,0 +1,4 @@
+# Python requirements for Smart Traffic Simulation
+# Note: traci and sumolib are also bundled with SUMO installation in SUMO_HOME/tools
+traci>=1.20.0
+sumolib>=1.20.0

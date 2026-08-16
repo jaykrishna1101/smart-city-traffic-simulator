@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edges xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/edges_file.xsd">
+    <!-- North perimeter feeder roads (3 lanes) -->
+    <edge id="N1_NW" from="N1" to="INT_NW" numLanes="3" speed="13.89"/>
+    <edge id="NW_N1" from="INT_NW" to="N1" numLanes="3" speed="13.89"/>
+    <edge id="N2_NE" from="N2" to="INT_NE" numLanes="3" speed="13.89"/>
+    <edge id="NE_N2" from="INT_NE" to="N2" numLanes="3" speed="13.89"/>
+
+    <!-- South perimeter feeder roads (3 lanes) -->
+    <edge id="S1_SW" from="S1" to="INT_SW" numLanes="3" speed="13.89"/>
+    <edge id="SW_S1" from="INT_SW" to="S1" numLanes="3" speed="13.89"/>
+    <edge id="S2_SE" from="S2" to="INT_SE" numLanes="3" speed="13.89"/>
+    <edge id="SE_S2" from="INT_SE" to="S2" numLanes="3" speed="13.89"/>
+
+    <!-- West perimeter feeder roads (3 lanes) -->
+    <edge id="W1_NW" from="W1" to="INT_NW" numLanes="3" speed="13.89"/>
+    <edge id="NW_W1" from="INT_NW" to="W1" numLanes="3" speed="13.89"/>
+    <edge id="W2_SW" from="W2" to="INT_SW" numLanes="3" speed="13.89"/>
+    <edge id="SW_W2" from="INT_SW" to="W2" numLanes="3" speed="13.89"/>
+
+    <!-- East perimeter feeder roads (3 lanes) -->
+    <edge id="E1_NE" from="E1" to="INT_NE" numLanes="3" speed="13.89"/>
+    <edge id="NE_E1" from="INT_NE" to="E1" numLanes="3" speed="13.89"/>
+    <edge id="E2_SE" from="E2" to="INT_SE" numLanes="3" speed="13.89"/>
+    <edge id="SE_E2" from="INT_SE" to="E2" numLanes="3" speed="13.89"/>
+
+    <!-- Internal grid connecting roads (2 lanes) -->
+    <edge id="NW_NE" from="INT_NW" to="INT_NE" numLanes="2" speed="13.89"/>
+    <edge id="NE_NW" from="INT_NE" to="INT_NW" numLanes="2" speed="13.89"/>
+    <edge id="NW_SW" from="INT_NW" to="INT_SW" numLanes="2" speed="13.89"/>
+    <edge id="SW_NW" from="INT_SW" to="INT_NW" numLanes="2" speed="13.89"/>
+    <edge id="NE_SE" from="INT_NE" to="INT_SE" numLanes="2" speed="13.89"/>
+    <edge id="SE_NE" from="INT_SE" to="INT_NE" numLanes="2" speed="13.89"/>
+    <edge id="SW_SE" from="INT_SW" to="INT_SE" numLanes="2" speed="13.89"/>
+    <edge id="SE_SW" from="INT_SE" to="INT_SW" numLanes="2" speed="13.89"/>
+</edges>

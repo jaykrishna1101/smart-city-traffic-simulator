@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Visual settings configuration for sumo-gui -->
+<viewsettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/viewsettings_file.xsd">
+    <scheme name="real_world">
+        <viewport zoom="160" x="300" y="300"/>
+        <delay value="50"/>
+        <!-- High-contrast crisp background and road rendering -->
+        <background backgroundColor="245,248,252"/>
+        <edges laneWidth="3.6" laneColor="uniform" customLaneColor="60,65,70" showLinkDecals="1" showLinkRules="1" showRails="1"/>
+        <junctions draw="1" color="uniform" customColor="85,90,95" showName="1" showTLIndex="1"/>
+        <!-- Double brightness, scale, and visibility for 3D vehicles -->
+        <vehicles show="1" colorMode="given" drawShape="1" minSize="8.0" exaggerate="2.0" showName="1" showBlinker="1"/>
+        <legend showSizeLegend="1"/>
+    </scheme>
+</viewsettings>
