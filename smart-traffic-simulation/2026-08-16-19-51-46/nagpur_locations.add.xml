@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <!-- Major Nagpur Neighborhood and Area Location Labels -->
+    <poi id="loc_Chhatrapati_Nagar" type="CHHATRAPATI NAGAR" color="255,255,255" layer="100.00" x="3237.10" y="2320.00"/>
+    <poi id="loc_Khamla" type="KHAMLA" color="255,255,255" layer="100.00" x="2225.60" y="1993.40"/>
+    <poi id="loc_Pratap_Nagar" type="PRATAP NAGAR" color="255,255,255" layer="100.00" x="1925.90" y="2971.60"/>
+    <poi id="loc_Vivekanand_Nagar" type="VIVEKANAND NAGAR" color="255,255,255" layer="100.00" x="3898.50" y="2836.80"/>
+    <poi id="loc_Narendra_Nagar" type="NARENDRA NAGAR" color="255,255,255" layer="100.00" x="4293.90" y="1170.90"/>
+    <poi id="loc_Ajni" type="AJNI" color="255,255,255" layer="100.00" x="4750.00" y="3050.00"/>
+    <poi id="loc_Manish_Nagar" type="MANISH NAGAR" color="255,255,255" layer="100.00" x="4487.00" y="117.00"/>
+</additional>

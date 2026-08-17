@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <!-- Professional, Single-Label Road POIs for Major Nagpur Corridors -->
+    <poi id="label_Ring_Road" type="Ring Road" color="255,255,255" layer="100.00" x="3280.00" y="2265.00" angle="-10.0"/>
+    <poi id="label_Khamla_Road" type="Khamla Road" color="255,255,255" layer="100.00" x="3360.00" y="1960.00" angle="45.0"/>
+    <poi id="label_West_High_Court_Road" type="West High Court Road" color="255,255,255" layer="100.00" x="3600.00" y="2460.00" angle="85.0"/>
+    <poi id="label_Wardha_Road" type="Wardha Road" color="255,255,255" layer="100.00" x="4060.00" y="1785.00" angle="75.0"/>
+    <poi id="label_Wardha_Road_Flyover" type="Wardha Road Flyover" color="255,255,255" layer="100.00" x="3980.00" y="1620.00" angle="75.0"/>
+    <poi id="label_Narendra_Nagar_Flyover" type="Narendra Nagar Flyover" color="255,255,255" layer="100.00" x="4580.00" y="1575.00" angle="-7.0"/>
+    <poi id="label_Cement_Road" type="Cement Road" color="255,255,255" layer="100.00" x="2755.00" y="2750.00" angle="88.0"/>
+    <poi id="label_Vidya_Vihar_Road" type="Vidya Vihar Road" color="255,255,255" layer="100.00" x="2380.00" y="2445.00" angle="10.0"/>
+    <poi id="label_Wankhede_Road" type="Wankhede Road" color="255,255,255" layer="100.00" x="2450.00" y="1410.00" angle="-11.0"/>
+</additional>

@@ -1,0 +1,32 @@
+<viewsettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/viewsettings_file.xsd">
+    <scheme name="real world">
+        <edges 
+            laneEdgeMode="0"
+            streetName_show="1"
+            streetName_size="100"
+            streetName_color="255,255,0"
+            streetName_bgColor="0,0,0,255"
+            streetName_constantSize="1"
+            edgeName_show="0"
+            internalEdgeName_show="0"
+            cwaEdgeName_show="0"
+        />
+        <vehicles colorMode="given" show="1" drawShape="1" minSize="3.0"/>
+    </scheme>
+    <scheme name="standard">
+        <edges 
+            laneEdgeMode="0"
+            streetName_show="1"
+            streetName_size="100"
+            streetName_color="255,255,0"
+            streetName_bgColor="0,0,0,255"
+            streetName_constantSize="1"
+            edgeName_show="0"
+            internalEdgeName_show="0"
+            cwaEdgeName_show="0"
+        />
+        <vehicles colorMode="given" show="1" drawShape="1" minSize="3.0"/>
+    </scheme>
+    <viewport zoom="400.0" centerX="3465.9" centerY="2198.3"/>
+    <delay value="20"/>
+</viewsettings>

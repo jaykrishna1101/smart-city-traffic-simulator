@@ -9,7 +9,7 @@ from controller.config import CONGESTION_LEVELS
 
 class TrafficMetricsCollector:
     """
-    Collects real-time traffic metrics for network edges and classifies congestion.
+    Collects real-time traffic metrics for network edges and lanes, and classifies congestion.
     """
     def __init__(self):
         self.prev_edge_vehicle_counts = {}
@@ -65,5 +65,39 @@ class TrafficMetricsCollector:
             "speed": avg_speed_ms,
             "speed_kmh": avg_speed_kmh,
             "traffic_flow": traffic_flow,
+            "congestion": congestion_level
+        }
+
+    def get_lane_metrics(self, lane_id: str) -> dict:
+        """
+        Queries TraCI for lane-level metrics: vehicle count, queue length, average waiting time, mean speed, and congestion level.
+        """
+        try:
+            veh_count = traci.lane.getLastStepVehicleNumber(lane_id)
+            queue_len = traci.lane.getLastStepHaltingNumber(lane_id)
+            avg_speed_ms = traci.lane.getLastStepMeanSpeed(lane_id)
+            # Estimate waiting time based on halting vehicles
+            total_waiting_time = queue_len * 10.0
+        except traci.TraCIException:
+            return {
+                "vehicles": 0,
+                "queue": 0,
+                "waiting_time": 0.0,
+                "speed": 0.0,
+                "speed_kmh": 0.0,
+                "congestion": "LOW"
+            }
+
+        avg_waiting_time = round(total_waiting_time / max(veh_count, 1), 2)
+        avg_speed_ms = max(0.0, round(avg_speed_ms, 2))
+        avg_speed_kmh = round(avg_speed_ms * 3.6, 2)
+        congestion_level = self.classify_congestion(queue_len, avg_waiting_time)
+
+        return {
+            "vehicles": veh_count,
+            "queue": queue_len,
+            "waiting_time": avg_waiting_time,
+            "speed": avg_speed_ms,
+            "speed_kmh": avg_speed_kmh,
             "congestion": congestion_level
         }

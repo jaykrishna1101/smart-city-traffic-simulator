@@ -1,0 +1,156 @@
+{
+  "scenario": "CHATRAPATI_RING_ROAD",
+  "seed": 42,
+  "simulation_duration": 350.0,
+  "vehicles": {
+    "AMBULANCE_NAGPUR": {
+      "vehicle_id": "AMBULANCE_NAGPUR",
+      "type": "ambulance",
+      "route_id": "route_AMBULANCE_DEMO",
+      "route_length_m": 560.3,
+      "target_tls": "cluster_2683490416_2683507646_2683507647_2684658305_#2more",
+      "fixed": {
+        "vehicle_id": "AMBULANCE_NAGPUR",
+        "type": "ambulance",
+        "route_id": "route_AMBULANCE_DEMO",
+        "route_length_m": 560.3,
+        "target_tls": "cluster_2683490416_2683507646_2683507647_2684658305_#2more",
+        "travel_duration_s": 60.0,
+        "waiting_time_s": 18.0,
+        "time_loss_s": 30.18,
+        "average_speed_kmh": 33.07,
+        "stops_count": 19,
+        "priority_overrides_steps": 0
+      },
+      "adaptive": {
+        "vehicle_id": "AMBULANCE_NAGPUR",
+        "type": "ambulance",
+        "route_id": "route_AMBULANCE_DEMO",
+        "route_length_m": 560.3,
+        "target_tls": "cluster_2683490416_2683507646_2683507647_2684658305_#2more",
+        "travel_duration_s": 37.0,
+        "waiting_time_s": 0.0,
+        "time_loss_s": 6.99,
+        "average_speed_kmh": 53.68,
+        "stops_count": 1,
+        "priority_overrides_steps": 8
+      },
+      "improvements": {
+        "travel_duration_reduction_pct": 38.3,
+        "waiting_time_reduction_pct": 100.0,
+        "time_loss_reduction_pct": 76.8,
+        "speed_increase_pct": 62.3
+      }
+    },
+    "POLICE_NAGPUR": {
+      "vehicle_id": "POLICE_NAGPUR",
+      "type": "police",
+      "route_id": "route_POLICE_DEMO",
+      "route_length_m": 692.9,
+      "target_tls": "cluster_2683490405_298938456",
+      "fixed": {
+        "vehicle_id": "POLICE_NAGPUR",
+        "type": "police",
+        "route_id": "route_POLICE_DEMO",
+        "route_length_m": 692.9,
+        "target_tls": "cluster_2683490405_298938456",
+        "travel_duration_s": 68.0,
+        "waiting_time_s": 3.0,
+        "time_loss_s": 31.52,
+        "average_speed_kmh": 36.29,
+        "stops_count": 4,
+        "priority_overrides_steps": 0
+      },
+      "adaptive": {
+        "vehicle_id": "POLICE_NAGPUR",
+        "type": "police",
+        "route_id": "route_POLICE_DEMO",
+        "route_length_m": 692.9,
+        "target_tls": "cluster_2683490405_298938456",
+        "travel_duration_s": 50.0,
+        "waiting_time_s": 0.0,
+        "time_loss_s": 14.14,
+        "average_speed_kmh": 48.59,
+        "stops_count": 1,
+        "priority_overrides_steps": 10
+      },
+      "improvements": {
+        "travel_duration_reduction_pct": 26.5,
+        "waiting_time_reduction_pct": 100.0,
+        "time_loss_reduction_pct": 55.1,
+        "speed_increase_pct": 33.9
+      }
+    },
+    "FIRETRUCK_NAGPUR": {
+      "vehicle_id": "FIRETRUCK_NAGPUR",
+      "type": "fire_truck",
+      "route_id": "route_FIRETRUCK_DEMO",
+      "route_length_m": 612.7,
+      "target_tls": "cluster_2683490405_298938456",
+      "fixed": {
+        "vehicle_id": "FIRETRUCK_NAGPUR",
+        "type": "fire_truck",
+        "route_id": "route_FIRETRUCK_DEMO",
+        "route_length_m": 612.7,
+        "target_tls": "cluster_2683490405_298938456",
+        "travel_duration_s": 67.0,
+        "waiting_time_s": 4.0,
+        "time_loss_s": 28.6,
+        "average_speed_kmh": 32.15,
+        "stops_count": 5,
+        "priority_overrides_steps": 0
+      },
+      "adaptive": {
+        "vehicle_id": "FIRETRUCK_NAGPUR",
+        "type": "fire_truck",
+        "route_id": "route_FIRETRUCK_DEMO",
+        "route_length_m": 612.7,
+        "target_tls": "cluster_2683490405_298938456",
+        "travel_duration_s": 56.0,
+        "waiting_time_s": 2.0,
+        "time_loss_s": 17.76,
+        "average_speed_kmh": 38.1,
+        "stops_count": 3,
+        "priority_overrides_steps": 20
+      },
+      "improvements": {
+        "travel_duration_reduction_pct": 16.4,
+        "waiting_time_reduction_pct": 50.0,
+        "time_loss_reduction_pct": 37.9,
+        "speed_increase_pct": 18.5
+      }
+    }
+  },
+  "overall_summary": {
+    "fixed": {
+      "avg_ev_travel_duration_s": 65.0,
+      "avg_ev_waiting_time_s": 8.33,
+      "avg_ev_time_loss_s": 30.1,
+      "avg_ev_speed_kmh": 33.84,
+      "general_traffic": {
+        "total_vehicles_inserted": 269,
+        "completed_vehicles": 149,
+        "avg_speed_kmh": 47.15,
+        "avg_waiting_time_s": 7.72
+      }
+    },
+    "adaptive": {
+      "avg_ev_travel_duration_s": 47.67,
+      "avg_ev_waiting_time_s": 0.67,
+      "avg_ev_time_loss_s": 12.96,
+      "avg_ev_speed_kmh": 46.79,
+      "general_traffic": {
+        "total_vehicles_inserted": 269,
+        "completed_vehicles": 151,
+        "avg_speed_kmh": 47.82,
+        "avg_waiting_time_s": 3.81
+      }
+    },
+    "improvements": {
+      "avg_response_time_reduction_pct": 26.7,
+      "avg_waiting_time_reduction_pct": 92.0,
+      "avg_time_loss_reduction_pct": 56.9,
+      "avg_speed_increase_pct": 38.3
+    }
+  }
+}

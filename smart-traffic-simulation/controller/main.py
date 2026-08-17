@@ -9,7 +9,7 @@ PROJECT_DIR = os.path.abspath(os.path.join(CONTROLLER_DIR, ".."))
 if PROJECT_DIR not in sys.path:
     sys.path.insert(0, PROJECT_DIR)
 
-from controller.config import FIXED_RESULTS_CSV, ADAPTIVE_RESULTS_CSV
+from controller.config import FIXED_RESULTS_CSV, ADAPTIVE_RESULTS_CSV, SCENARIO_NAME
 from controller.simulation_manager import SimulationManager
 from controller.adaptive_controller import AdaptiveTrafficController
 from controller.metrics_exporter import BenchmarkTracker
@@ -30,41 +30,56 @@ def get_scenario_bounds(scenario: str, default_max: int = 480) -> tuple:
 
 def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bool = False, max_steps: int = 480, scenario: str = "all") -> dict:
     """
-    Executes a simulation session under specified CONTROL_MODE ("FIXED" or "ADAPTIVE") and scenario filter.
+    Executes a simulation session under specified CONTROL_MODE ("FIXED", "ADAPTIVE", or "EMERGENCY_DEMO") and scenario filter.
     Returns aggregated empirical benchmark metrics.
     """
+    mode_normalized = mode.upper().replace("-", "_")
+    is_adaptive_or_demo = mode_normalized in ["ADAPTIVE", "EMERGENCY_DEMO"]
+    is_demo = mode_normalized == "EMERGENCY_DEMO"
+
     manager = SimulationManager(gui=gui, use_3d=use_3d)
-    controller = AdaptiveTrafficController() if mode == "ADAPTIVE" else None
+    controller = AdaptiveTrafficController(enable_emergency=True) if is_adaptive_or_demo else None
     tracker = BenchmarkTracker()
     current_period = None
 
-    csv_output_path = ADAPTIVE_RESULTS_CSV if mode == "ADAPTIVE" else FIXED_RESULTS_CSV
+    csv_output_path = ADAPTIVE_RESULTS_CSV if is_adaptive_or_demo else FIXED_RESULTS_CSV
     start_step, end_step = get_scenario_bounds(scenario, max_steps)
 
     try:
         manager.start()
         print(f"\n=========================================================================")
-        print(f"  RUNNING CONTROL MODE: {mode:<10} | SCENARIO: {scenario.upper():<8} | INDIAN LHT   ")
+        print(f"  RUNNING CONTROL MODE: {mode:<10} | NETWORK: {SCENARIO_NAME:<22} | INDIAN LHT   ")
         print(f"=========================================================================\n")
 
         step_count = 0
 
-        # Fast forward if starting scenario at t > 0
         while manager.is_active():
             sim_time = manager.step()
             
+            # Spawn test emergency vehicles (ambulance at 50s, police at 150s, firetruck at 250s)
+            if controller and hasattr(controller, 'emergency_sys'):
+                controller.emergency_sys.spawn_test_emergency_vehicles(sim_time)
+            elif hasattr(manager.aggregator, 'emergency_detector'):
+                # In fixed mode, trigger test vehicles via emergency system
+                pass
+
             if sim_time < start_step:
                 continue
 
             state = manager.get_traffic_state()
 
-            # Execute Adaptive Controller decisions if in ADAPTIVE mode
+            # Dynamically execute Adaptive / Emergency Priority decisions for all discovered traffic lights
             decisions = {}
-            if mode == "ADAPTIVE" and controller:
-                for tls_id in ["INT_NW", "INT_NE", "INT_SW", "INT_SE"]:
-                    decision = controller.get_signal_decision(tls_id)
+            if is_adaptive_or_demo and controller:
+                tls_ids = list(state["intersections"].keys())
+                for tls_id in tls_ids:
+                    decision = controller.get_signal_decision(tls_id, state=state)
                     controller.apply_signal_decision(decision)
                     decisions[tls_id] = decision
+
+            # Update automatic camera tracking during Emergency Demo mode
+            if is_demo and controller and hasattr(controller, 'emergency_sys'):
+                controller.emergency_sys.update_camera_tracking(gui=gui)
 
             # Track benchmark metrics & export CSV/JSON
             tracker.update(sim_time, state)
@@ -79,8 +94,8 @@ def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bo
 
             # Periodic Console Reporting (Every 30 steps)
             if step_count % 30 == 0:
-                print(f"Step {int(sim_time):3d}s | Mode: {mode:<8} | Period: {period:<13}")
-                if mode == "ADAPTIVE":
+                print(f"Step {int(sim_time):3d}s | Mode: {mode_normalized:<14} | Period: {period:<13}")
+                if is_adaptive_or_demo:
                     for tls_id, decision in decisions.items():
                         print(f"   [{tls_id}] Decision: {decision['phase']:<20} ({decision['green_duration']}s) | Reason: {decision['reason']}")
 
@@ -109,7 +124,7 @@ def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bo
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Smart City Traffic Control System")
-    parser.add_argument("--mode", type=str, choices=["FIXED", "ADAPTIVE"], default="ADAPTIVE", help="Traffic signal control mode")
+    parser.add_argument("--mode", type=str, choices=["FIXED", "ADAPTIVE", "EMERGENCY_DEMO", "EMERGENCY-DEMO", "fixed", "adaptive", "emergency-demo", "emergency_demo"], default="ADAPTIVE", help="Traffic signal control mode")
     parser.add_argument("--scenario", type=str, choices=["all", "morning", "normal", "evening"], default="all", help="Traffic period scenario filter")
     parser.add_argument("--gui", action="store_true", help="Launch SUMO in GUI mode")
     parser.add_argument("--3d", action="store_true", dest="use_3d", help="Enable OpenSceneGraph (OSG) 3D Viewport in sumo-gui")
