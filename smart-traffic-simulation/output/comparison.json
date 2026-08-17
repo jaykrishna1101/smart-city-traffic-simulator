@@ -1,28 +1,29 @@
 {
+    "scenario": "CHATRAPATI_RING_ROAD",
     "fixed": {
-        "total_vehicles_inserted": 428,
-        "throughput": 2,
-        "average_waiting_time": 3.4,
-        "max_queue": 40,
-        "average_speed_kmh": 24.51,
-        "congestion_events": 924,
-        "emergency_response_time": 109.2
+        "total_vehicles_inserted": 306,
+        "throughput": 1,
+        "average_waiting_time": 1.92,
+        "max_queue": 7,
+        "average_speed_kmh": 44.36,
+        "congestion_events": 92,
+        "emergency_response_time": 67.0
     },
     "adaptive": {
-        "total_vehicles_inserted": 428,
-        "throughput": 0,
-        "average_waiting_time": 0.76,
-        "max_queue": 13,
-        "average_speed_kmh": 32.48,
-        "congestion_events": 105,
-        "emergency_response_time": 64.2
+        "total_vehicles_inserted": 306,
+        "throughput": 1,
+        "average_waiting_time": 2.64,
+        "max_queue": 7,
+        "average_speed_kmh": 44.99,
+        "congestion_events": 187,
+        "emergency_response_time": 17.0
     },
     "improvement_percentage": {
-        "average_waiting_time": "77.6% reduction",
-        "max_queue": "67.5% reduction",
-        "throughput": "-100.0% increase",
-        "average_speed": "32.5% increase",
-        "congestion_events": "88.6% reduction",
-        "emergency_response_time": "41.2% reduction"
+        "average_waiting_time": "-37.5% reduction",
+        "max_queue": "0.0% reduction",
+        "throughput": "0.0% increase",
+        "average_speed": "1.4% increase",
+        "congestion_events": "-103.3% reduction",
+        "emergency_response_time": "74.6% reduction"
     }
 }

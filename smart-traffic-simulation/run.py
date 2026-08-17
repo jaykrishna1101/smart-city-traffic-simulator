@@ -12,7 +12,7 @@ from scripts.run_comparison import run_fixed_vs_adaptive_benchmark
 
 def main():
     parser = argparse.ArgumentParser(description="Smart City Adaptive Traffic Management System (Indian Left-Hand Traffic)")
-    parser.add_argument("--mode", type=str, choices=["fixed", "adaptive", "compare"], default="adaptive", help="Signal control strategy ('fixed', 'adaptive', or 'compare')")
+    parser.add_argument("--mode", type=str, choices=["fixed", "adaptive", "compare", "emergency-demo", "emergency_demo"], default="adaptive", help="Signal control strategy ('fixed', 'adaptive', 'compare', or 'emergency-demo')")
     parser.add_argument("--scenario", type=str, choices=["all", "morning", "normal", "evening"], default="all", help="Traffic period scenario filter ('all', 'morning', 'normal', 'evening')")
     parser.add_argument("--gui", action="store_true", help="Launch SUMO in GUI mode (sumo-gui)")
     parser.add_argument("--3d", "--osg", action="store_true", dest="use_3d", help="Launch SUMO-GUI with OpenSceneGraph (OSG) 3D Viewport enabled")

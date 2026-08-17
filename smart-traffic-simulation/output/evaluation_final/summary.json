@@ -1,0 +1,159 @@
+{
+    "scenario": "CHATRAPATI_RING_ROAD",
+    "evaluation_version": "final_hackathon_benchmark",
+    "seed": 42,
+    "experiments": {
+        "morning": {
+            "FIXED": {
+                "mode": "FIXED",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 334,
+                "throughput_veh_per_sec": 0.5567,
+                "average_waiting_time": 3.64,
+                "average_queue_length": 0.52,
+                "max_queue": 7,
+                "average_speed_kmh": 62.25,
+                "congestion_events": 501,
+                "teleports": 0,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "MORNING",
+                "seed": 42
+            },
+            "ADAPTIVE": {
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 313,
+                "throughput_veh_per_sec": 0.5217,
+                "average_waiting_time": 11.54,
+                "average_queue_length": 0.64,
+                "max_queue": 9,
+                "average_speed_kmh": 64.52,
+                "congestion_events": 1119,
+                "teleports": 2,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "MORNING",
+                "seed": 42
+            }
+        },
+        "normal": {
+            "FIXED": {
+                "mode": "FIXED",
+                "total_vehicles_inserted": 454,
+                "completed_vehicles": 439,
+                "throughput_veh_per_sec": 0.7317,
+                "average_waiting_time": 7.23,
+                "average_queue_length": 0.78,
+                "max_queue": 7,
+                "average_speed_kmh": 54.44,
+                "congestion_events": 948,
+                "teleports": 4,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "NORMAL",
+                "seed": 42
+            },
+            "ADAPTIVE": {
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 453,
+                "completed_vehicles": 409,
+                "throughput_veh_per_sec": 0.6817,
+                "average_waiting_time": 27.96,
+                "average_queue_length": 1.74,
+                "max_queue": 18,
+                "average_speed_kmh": 46.1,
+                "congestion_events": 2373,
+                "teleports": 14,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "NORMAL",
+                "seed": 42
+            }
+        },
+        "evening": {
+            "FIXED": {
+                "mode": "FIXED",
+                "total_vehicles_inserted": 454,
+                "completed_vehicles": 472,
+                "throughput_veh_per_sec": 0.7867,
+                "average_waiting_time": 6.31,
+                "average_queue_length": 0.6,
+                "max_queue": 7,
+                "average_speed_kmh": 56.43,
+                "congestion_events": 845,
+                "teleports": 2,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "EVENING",
+                "seed": 42
+            },
+            "ADAPTIVE": {
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 429,
+                "throughput_veh_per_sec": 0.715,
+                "average_waiting_time": 37.0,
+                "average_queue_length": 1.57,
+                "max_queue": 12,
+                "average_speed_kmh": 44.24,
+                "congestion_events": 2652,
+                "teleports": 19,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "EVENING",
+                "seed": 42
+            }
+        }
+    },
+    "emergency_test": [
+        {
+            "vehicle_id": "AMBULANCE_NAGPUR",
+            "vehicle_type": "ambulance",
+            "from_edge": "372646899#12",
+            "to_edge": "262807084#1",
+            "target_tls": "N/A",
+            "spawn_time_s": 50.0,
+            "priority_activation_time_s": 50.0,
+            "priority_clearance_time_s": 50.0,
+            "arrival_time_s": 50.0,
+            "emergency_response_time_s": 0.0,
+            "emergency_waiting_time_s": 0.0,
+            "normal_traffic_delay_s": 0.0,
+            "queue_impact_vehicles": 0,
+            "recovery_time_s": 4.0
+        },
+        {
+            "vehicle_id": "POLICE_NAGPUR",
+            "vehicle_type": "police",
+            "from_edge": "1212699691#3",
+            "to_edge": "1153418481",
+            "target_tls": "N/A",
+            "spawn_time_s": 200.0,
+            "priority_activation_time_s": 200.0,
+            "priority_clearance_time_s": 200.0,
+            "arrival_time_s": 200.0,
+            "emergency_response_time_s": 0.0,
+            "emergency_waiting_time_s": 0.0,
+            "normal_traffic_delay_s": 0.0,
+            "queue_impact_vehicles": 0,
+            "recovery_time_s": 4.0
+        },
+        {
+            "vehicle_id": "FIRETRUCK_NAGPUR",
+            "vehicle_type": "fire_truck",
+            "from_edge": "-1274948100",
+            "to_edge": "1274948100",
+            "target_tls": "N/A",
+            "spawn_time_s": 350.0,
+            "priority_activation_time_s": 350.0,
+            "priority_clearance_time_s": 350.0,
+            "arrival_time_s": 350.0,
+            "emergency_response_time_s": 0.0,
+            "emergency_waiting_time_s": 0.0,
+            "normal_traffic_delay_s": 0.0,
+            "queue_impact_vehicles": 0,
+            "recovery_time_s": 4.0
+        }
+    ]
+}

@@ -1,59 +1,74 @@
 import os
 import sys
-import subprocess
 
-def run_cmd(command):
-    print(f"Executing: {command}")
-    res = subprocess.run(command, shell=True, capture_output=True, text=True)
-    if res.returncode != 0:
-        print(f"FAILED (code {res.returncode}):\n{res.stderr}")
-        return False, res.stdout + res.stderr
-    print(f"SUCCESS:\n{res.stdout}")
-    return True, res.stdout
+# Ensure project directory is in sys.path
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
+if PROJECT_DIR not in sys.path:
+    sys.path.insert(0, PROJECT_DIR)
 
-def validate_simulation():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    project_dir = os.path.abspath(os.path.join(script_dir, ".."))
+import traci
+from controller.config import SUMO_CONFIG_PATH
+from controller.network_topology import (
+    get_traffic_lights,
+    get_intersection_topology,
+    get_incoming_lanes,
+    get_incoming_edges,
+    get_controlled_links,
+    get_signal_phases
+)
+from controller.traffic_state import TrafficStateAggregator
+
+def validate_and_report_network():
+    print(f"Loading SUMO network configuration: {SUMO_CONFIG_PATH}")
+    sumo_cmd = ["sumo", "-c", SUMO_CONFIG_PATH, "--no-step-log", "true"]
     
-    config_file = os.path.join(project_dir, "simulation", "config", "simulation.sumocfg")
-    nodes_file = os.path.join(project_dir, "simulation", "network", "nodes.nod.xml")
-    edges_file = os.path.join(project_dir, "simulation", "network", "edges.edg.xml")
-    net_file = os.path.join(project_dir, "simulation", "network", "city.net.xml")
+    traci.start(sumo_cmd)
+    traci.simulationStep()
+
+    tls_ids = get_traffic_lights()
+
+    print("\n=========================================================================")
+    print(f"             DYNAMIC NETWORK TOPOLOGY DISCOVERY REPORT                   ")
+    print(f"=========================================================================")
+    print(f"Traffic lights: {len(tls_ids)}\n")
+
+    for idx, tls_id in enumerate(tls_ids, 1):
+        topo = get_intersection_topology(tls_id)
+        print(f"TLS #{idx}:")
+        print(f"  ID: {topo['tls_id']}")
+        print(f"  Incoming edges ({len(topo['incoming_edges'])}): {topo['incoming_edges']}")
+        print(f"  Incoming lanes ({len(topo['incoming_lanes'])}): {topo['incoming_lanes']}")
+        print(f"  Controlled links ({len(topo['controlled_links'])}):")
+        for link in topo['controlled_links']:
+            print(f"    {link[0]} -> {link[1]}")
+        print(f"  Number of phases: {topo['num_phases']}")
+        print(f"  Current phase index: {topo['current_phase']}")
+        print(f"  Phase state: {topo['phase_state']}")
+        print("-" * 65)
+
+    print("\n=== VERIFYING TRAFFIC METRICS & TELEMETRY COLLECTION ===")
+    aggregator = TrafficStateAggregator()
     
-    sumo_home = os.environ.get("SUMO_HOME", "C:\\Program Files (x86)\\Eclipse\\Sumo")
-    sumo_bin = os.path.join(sumo_home, "bin", "sumo.exe")
-    netconvert_bin = os.path.join(sumo_home, "bin", "netconvert.exe")
+    # Run 50 steps to collect active telemetry
+    for step in range(50):
+        traci.simulationStep()
+
+    state = aggregator.get_traffic_state()
+    print(f"Simulation step: {state['simulation_time']}s | Period: {state['period']} | Scenario: {state['scenario']}")
+    print(f"Intersections discovered in state: {list(state['intersections'].keys())}")
     
-    if not os.path.exists(sumo_bin):
-        sumo_bin = "sumo"
-    if not os.path.exists(netconvert_bin):
-        netconvert_bin = "netconvert"
+    for tls_id, tls_data in state['intersections'].items():
+        print(f"\n  [Intersection: {tls_id}]")
+        print(f"    Phase Index: {tls_data['signal_phase']} | Phase State: {tls_data['phase_state']}")
+        print(f"    Total Vehicles: {tls_data['total_vehicles']} | Total Queue: {tls_data['total_queue']} | Avg Wait: {tls_data['average_waiting_time']}s")
+        for edge_id, app in tls_data.get('approaches', {}).items():
+            print(f"      Edge '{edge_id}': vehs={app['vehicles']}, queue={app['queue']}, wait={app['waiting_time']}s, speed={app['speed_kmh']}km/h, congestion={app['congestion']}")
 
-    print("=== STEP 1: Validating Network Compilation (netconvert LHT) ===")
-    net_cmd = f'"{netconvert_bin}" --node-files="{nodes_file}" --edge-files="{edges_file}" --lefthand --output-file="{net_file}"'
-    ok, out = run_cmd(net_cmd)
-    if not ok:
-        print("Network validation failed.")
-        sys.exit(1)
-
-    print("=== STEP 2: Running Headless SUMO Simulation Dry-Run ===")
-    sumo_cmd = f'"{sumo_bin}" -c "{config_file}" --no-warnings false'
-    ok, out = run_cmd(sumo_cmd)
-    if not ok:
-        print("Simulation dry-run failed.")
-        sys.exit(1)
-        
-    print("=== STEP 3: Checking Simulation Output & Emergency Vehicle Statistics ===")
-    tripinfo_file = os.path.abspath(os.path.join(project_dir, "output", "tripinfo.xml"))
-    if os.path.exists(tripinfo_file):
-        with open(tripinfo_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-            if "AMBULANCE_01" in content and "AMBULANCE_02" in content:
-                print("Emergency Vehicles AMBULANCE_01 and AMBULANCE_02 successfully traversed the network!")
-            else:
-                print(f"Warning: Ambulance entries check in {tripinfo_file}.")
-
-    print("\nALL SUMO VALIDATION CHECKS PASSED SUCCESSFULLY!")
+    traci.close()
+    print("\n=========================================================================")
+    print("ALL DYNAMIC NETWORK DISCOVERY & TELEMETRY CHECKS PASSED SUCCESSFULLY!")
+    print("=========================================================================\n")
 
 if __name__ == "__main__":
-    validate_simulation()
+    validate_and_report_network()

@@ -4,8 +4,11 @@ import os
 CONTROLLER_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.abspath(os.path.join(CONTROLLER_DIR, ".."))
 
-# Config & Output paths
-SUMO_CONFIG_PATH = os.path.join(PROJECT_DIR, "simulation", "config", "simulation.sumocfg")
+# Scenario Metadata & Paths
+SCENARIO_NAME = "CHATRAPATI_RING_ROAD"
+SCENARIO_DIR = os.path.join(PROJECT_DIR, "2026-08-16-19-51-46")
+SUMO_CONFIG_PATH = os.path.join(SCENARIO_DIR, "osm.sumocfg")
+
 OUTPUT_DIR = os.path.join(PROJECT_DIR, "output")
 OUTPUT_CSV_PATH = os.path.join(OUTPUT_DIR, "traffic_data.csv")
 OUTPUT_JSON_PATH = os.path.join(OUTPUT_DIR, "latest_state.json")
@@ -17,63 +20,11 @@ COMPARISON_JSON_PATH = os.path.join(OUTPUT_DIR, "comparison.json")
 # Default Control Mode ("FIXED" or "ADAPTIVE")
 CONTROL_MODE = "ADAPTIVE"
 
-# Network Intersection directional incoming edge definitions (Indian Left-Hand Traffic)
-INTERSECTION_MAP = {
-    "INT_NW": {
-        "north": "N1_NW",
-        "south": "SW_NW",
-        "east": "NE_NW",
-        "west": "W1_NW"
-    },
-    "INT_NE": {
-        "north": "N2_NE",
-        "south": "SE_NE",
-        "east": "E1_NE",
-        "west": "NW_NE"
-    },
-    "INT_SW": {
-        "north": "NW_SW",
-        "south": "S1_SW",
-        "east": "SE_SW",
-        "west": "W2_SW"
-    },
-    "INT_SE": {
-        "north": "NE_SE",
-        "south": "S2_SE",
-        "east": "E2_SE",
-        "west": "SW_SE"
-    }
-}
-
-# Signal Phase Mappings to exact SUMO LHT net.xml phase indices
-PHASE_MAP = {
-    "INT_NW": {
-        "NORTH_SOUTH": 0,
-        "YELLOW_NS": 1,
-        "EAST_WEST": 4,
-        "YELLOW_EW": 5
-    },
-    "INT_NE": {
-        "EAST_WEST": 0,
-        "YELLOW_EW": 1,
-        "NORTH_SOUTH": 4,
-        "YELLOW_NS": 5
-    },
-    "INT_SW": {
-        "NORTH_SOUTH": 0,
-        "YELLOW_NS": 1,
-        "EAST_WEST": 4,
-        "YELLOW_EW": 5
-    },
-    "INT_SE": {
-        "NORTH_SOUTH": 0,
-        "YELLOW_NS": 1,
-        "EAST_WEST": 4,
-        "YELLOW_EW": 5
-    }
-}
-
 # Logical Peak Period boundaries (Simulation clock seconds)
+# Peak Hours:
+# 09:00 - 12:00 -> MORNING_PEAK (0s - 180s in demo clock)
+# 12:00 - 16:00 -> NORMAL       (180s - 240s in demo clock)
+# 16:00 - 19:00 -> EVENING_PEAK (240s - 480s in demo clock)
 PEAK_PERIOD_BOUNDARIES = {
     "MORNING_PEAK": (0.0, 180.0),
     "NORMAL": (180.0, 240.0),
@@ -94,8 +45,10 @@ QUEUE_WEIGHT = 2.0
 WAITING_WEIGHT = 0.5
 
 # Adaptive Signal Controller Parameters
-MIN_GREEN_TIME = 10         # Minimum green duration (seconds)
-MAX_GREEN_TIME = 60         # Maximum green duration (seconds)
-YELLOW_TIME = 4             # Yellow transition duration (seconds)
-STARVATION_THRESHOLD = 90.0 # Anti-starvation threshold (seconds)
-EMERGENCY_TRIGGER_DIST = 150.0 # Distance to TLS for ambulance/fire/police priority
+# MIN_GREEN_TIME must be >= the largest minDur in the OSM actuated signal programs
+# (osm.net.xml shows minDur values of 13s-16s; setting to 16s prevents premature switching)
+MIN_GREEN_TIME = 16         # Minimum green duration (seconds) — matches OSM minDur=16s
+MAX_GREEN_TIME = 90         # Maximum green duration (seconds)
+YELLOW_TIME = 6             # Yellow transition duration (seconds) — matches OSM yellow phases
+STARVATION_THRESHOLD = 60.0 # Anti-starvation threshold (seconds) — faster starvation relief
+EMERGENCY_TRIGGER_DIST = 200.0 # Distance to TLS for ambulance/fire/police priority

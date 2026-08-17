@@ -1,0 +1,129 @@
+{
+    "scenario": "CHATRAPATI_RING_ROAD",
+    "evaluation_timestamp": "2026-08-16 22:58:14",
+    "seed": 42,
+    "duration_per_run_s": 600.0,
+    "note": "Emergency vehicles excluded from comparison runs for fairness.",
+    "scenarios": {
+        "morning": {
+            "fixed": {
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "mode": "FIXED",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 334,
+                "throughput": 334,
+                "average_waiting_time": 8.34,
+                "average_queue_length": 0.52,
+                "max_queue": 7,
+                "average_speed": 18.91,
+                "average_speed_kmh": 68.08,
+                "congestion_events": 25,
+                "emergency_response_time": 0.0,
+                "period_scenario": "MORNING"
+            },
+            "adaptive": {
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 315,
+                "throughput": 315,
+                "average_waiting_time": 4.62,
+                "average_queue_length": 0.6,
+                "max_queue": 7,
+                "average_speed": 19.22,
+                "average_speed_kmh": 69.19,
+                "congestion_events": 18,
+                "emergency_response_time": 0.0,
+                "period_scenario": "MORNING"
+            },
+            "improvements_pct": {
+                "waiting_time_reduction_pct": 44.6,
+                "avg_queue_reduction_pct": -15.38,
+                "max_queue_reduction_pct": 0.0,
+                "throughput_improvement_pct": -5.69,
+                "average_speed_improvement_pct": 1.63,
+                "congestion_events_reduction_pct": 28.0
+            }
+        },
+        "normal": {
+            "fixed": {
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "mode": "FIXED",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 334,
+                "throughput": 334,
+                "average_waiting_time": 8.34,
+                "average_queue_length": 0.52,
+                "max_queue": 7,
+                "average_speed": 18.91,
+                "average_speed_kmh": 68.08,
+                "congestion_events": 25,
+                "emergency_response_time": 0.0,
+                "period_scenario": "NORMAL"
+            },
+            "adaptive": {
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 315,
+                "throughput": 315,
+                "average_waiting_time": 4.62,
+                "average_queue_length": 0.6,
+                "max_queue": 7,
+                "average_speed": 19.22,
+                "average_speed_kmh": 69.19,
+                "congestion_events": 18,
+                "emergency_response_time": 0.0,
+                "period_scenario": "NORMAL"
+            },
+            "improvements_pct": {
+                "waiting_time_reduction_pct": 44.6,
+                "avg_queue_reduction_pct": -15.38,
+                "max_queue_reduction_pct": 0.0,
+                "throughput_improvement_pct": -5.69,
+                "average_speed_improvement_pct": 1.63,
+                "congestion_events_reduction_pct": 28.0
+            }
+        },
+        "evening": {
+            "fixed": {
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "mode": "FIXED",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 334,
+                "throughput": 334,
+                "average_waiting_time": 8.34,
+                "average_queue_length": 0.52,
+                "max_queue": 7,
+                "average_speed": 18.91,
+                "average_speed_kmh": 68.08,
+                "congestion_events": 25,
+                "emergency_response_time": 0.0,
+                "period_scenario": "EVENING"
+            },
+            "adaptive": {
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 315,
+                "throughput": 315,
+                "average_waiting_time": 4.62,
+                "average_queue_length": 0.6,
+                "max_queue": 7,
+                "average_speed": 19.22,
+                "average_speed_kmh": 69.19,
+                "congestion_events": 18,
+                "emergency_response_time": 0.0,
+                "period_scenario": "EVENING"
+            },
+            "improvements_pct": {
+                "waiting_time_reduction_pct": 44.6,
+                "avg_queue_reduction_pct": -15.38,
+                "max_queue_reduction_pct": 0.0,
+                "throughput_improvement_pct": -5.69,
+                "average_speed_improvement_pct": 1.63,
+                "congestion_events_reduction_pct": 28.0
+            }
+        }
+    }
+}

@@ -1,0 +1,4 @@
+scenario,period_scenario,fixed_vehicles,adaptive_vehicles,fixed_completed,adaptive_completed,completed_improvement_pct,fixed_avg_waiting_s,adaptive_avg_waiting_s,waiting_time_reduction_pct,fixed_avg_queue,adaptive_avg_queue,queue_reduction_pct,fixed_max_queue,adaptive_max_queue,max_queue_reduction_pct,fixed_avg_speed_kmh,adaptive_avg_speed_kmh,average_speed_improvement_pct
+CHATRAPATI_RING_ROAD,MORNING,455,455,334,313,-6.29%,3.64,11.54,-217.03%,0.52,0.64,-23.08%,7,9,-28.57%,62.25,64.52,3.65%
+CHATRAPATI_RING_ROAD,NORMAL,454,453,439,409,-6.83%,7.23,27.96,-286.72%,0.78,1.74,-123.08%,7,18,-157.14%,54.44,46.1,-15.32%
+CHATRAPATI_RING_ROAD,EVENING,454,455,472,429,-9.11%,6.31,37.0,-486.37%,0.6,1.57,-161.67%,7,12,-71.43%,56.43,44.24,-21.6%

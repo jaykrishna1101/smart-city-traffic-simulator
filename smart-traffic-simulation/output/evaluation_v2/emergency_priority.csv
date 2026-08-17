@@ -1,0 +1,4 @@
+vehicle_id,vehicle_type,from_edge,to_edge,target_tls,spawn_time_s,priority_activation_time_s,priority_clearance_time_s,arrival_time_s,emergency_response_time_s,emergency_waiting_time_s,normal_traffic_delay_s,queue_impact_vehicles,recovery_time_s
+AMBULANCE_NAGPUR,ambulance,372646899#12,262807084#1,N/A,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0,4.0
+POLICE_NAGPUR,police,1212699691#3,1153418481,N/A,200.0,200.0,200.0,200.0,0.0,0.0,0.0,0,4.0
+FIRETRUCK_NAGPUR,fire_truck,-1274948100,1274948100,N/A,350.0,350.0,350.0,350.0,0.0,0.0,0.0,0,4.0

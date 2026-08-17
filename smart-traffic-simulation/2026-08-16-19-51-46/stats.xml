@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-08-17T14:57:50.318879+05:30 by Eclipse SUMO GUI 1.27.1
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\osm.net.xml.gz"/>
+        <route-files value="C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\osm.bus.trips.xml,C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\osm.passenger.trips.xml"/>
+        <additional-files value="C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\osm.poly.xml.gz,C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\output.add.xml,C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\nagpur_road_labels.add.xml,C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\nagpur_locations.add.xml"/>
+    </input>
+
+    <output>
+        <tripinfo-output value="C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\tripinfos.xml"/>
+        <statistic-output value="C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\stats.xml"/>
+    </output>
+
+    <processing>
+        <ignore-route-errors value="true"/>
+        <tls.actuated.jam-threshold value="30"/>
+    </processing>
+
+    <routing>
+        <device.rerouting.adaptation-steps value="18"/>
+        <device.rerouting.adaptation-interval value="10"/>
+    </routing>
+
+    <report>
+        <verbose value="true"/>
+        <no-warnings value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="55355"/>
+    </traci_server>
+
+    <gui_only>
+        <gui-settings-file value="C:\Users\jkkho\OneDrive\Documents\traffic_simulation\smart-traffic-simulation\2026-08-16-19-51-46\osm.view.xml"/>
+    </gui_only>
+
+</sumoConfiguration>
+-->
+
+<statistics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/statistic_file.xsd">
+    <performance clockBegin="802.10" clockEnd="846.20" clockDuration="44.10" traciDuration="25.89" realTimeFactor="10.88" vehicleUpdatesPerSecond="1001.22" personUpdatesPerSecond="0.00" begin="0.00" end="480.00" duration="480.00"/>
+    <vehicles loaded="463" inserted="367" running="118" waiting="0"/>
+    <teleports total="1" jam="0" yield="1" wrongLane="0"/>
+    <safety collisions="0" emergencyStops="1" emergencyBraking="3"/>
+    <persons loaded="0" running="0" jammed="0"/>
+    <personTeleports total="0" abortWait="0" wrongDest="0"/>
+    <vehicleTripStatistics count="249" routeLength="1704.24" speed="12.77" duration="134.84" waitingTime="10.59" timeLoss="41.94" departDelay="0.48" departDelayWaiting="-1.00" totalTravelTime="33576.00" totalDepartDelay="120.97"/>
+    <pedestrianStatistics number="0" routeLength="0.00" duration="0.00" timeLoss="0.00"/>
+    <rideStatistics number="0"/>
+    <transportStatistics number="0"/>
+</statistics>

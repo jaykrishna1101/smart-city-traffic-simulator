@@ -1,0 +1,131 @@
+{
+    "scenario": "CHATRAPATI_RING_ROAD",
+    "evaluation_version": "final_hackathon_benchmark",
+    "evaluation_timestamp": "2026-08-16 22:40:16",
+    "seed": 42,
+    "scenarios": {
+        "morning": {
+            "fixed": {
+                "mode": "FIXED",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 334,
+                "throughput_veh_per_sec": 0.5567,
+                "average_waiting_time": 3.64,
+                "average_queue_length": 0.52,
+                "max_queue": 7,
+                "average_speed_kmh": 62.25,
+                "congestion_events": 501,
+                "teleports": 0,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "MORNING",
+                "seed": 42
+            },
+            "adaptive": {
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 313,
+                "throughput_veh_per_sec": 0.5217,
+                "average_waiting_time": 11.54,
+                "average_queue_length": 0.64,
+                "max_queue": 9,
+                "average_speed_kmh": 64.52,
+                "congestion_events": 1119,
+                "teleports": 2,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "MORNING",
+                "seed": 42
+            },
+            "improvements": {
+                "waiting_time_reduction_pct": -217.03,
+                "avg_queue_reduction_pct": -23.08,
+                "max_queue_reduction_pct": -28.57,
+                "throughput_improvement_pct": -6.29,
+                "average_speed_improvement_pct": 3.65
+            }
+        },
+        "normal": {
+            "fixed": {
+                "mode": "FIXED",
+                "total_vehicles_inserted": 454,
+                "completed_vehicles": 439,
+                "throughput_veh_per_sec": 0.7317,
+                "average_waiting_time": 7.23,
+                "average_queue_length": 0.78,
+                "max_queue": 7,
+                "average_speed_kmh": 54.44,
+                "congestion_events": 948,
+                "teleports": 4,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "NORMAL",
+                "seed": 42
+            },
+            "adaptive": {
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 453,
+                "completed_vehicles": 409,
+                "throughput_veh_per_sec": 0.6817,
+                "average_waiting_time": 27.96,
+                "average_queue_length": 1.74,
+                "max_queue": 18,
+                "average_speed_kmh": 46.1,
+                "congestion_events": 2373,
+                "teleports": 14,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "NORMAL",
+                "seed": 42
+            },
+            "improvements": {
+                "waiting_time_reduction_pct": -286.72,
+                "avg_queue_reduction_pct": -123.08,
+                "max_queue_reduction_pct": -157.14,
+                "throughput_improvement_pct": -6.83,
+                "average_speed_improvement_pct": -15.32
+            }
+        },
+        "evening": {
+            "fixed": {
+                "mode": "FIXED",
+                "total_vehicles_inserted": 454,
+                "completed_vehicles": 472,
+                "throughput_veh_per_sec": 0.7867,
+                "average_waiting_time": 6.31,
+                "average_queue_length": 0.6,
+                "max_queue": 7,
+                "average_speed_kmh": 56.43,
+                "congestion_events": 845,
+                "teleports": 2,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "EVENING",
+                "seed": 42
+            },
+            "adaptive": {
+                "mode": "ADAPTIVE",
+                "total_vehicles_inserted": 455,
+                "completed_vehicles": 429,
+                "throughput_veh_per_sec": 0.715,
+                "average_waiting_time": 37.0,
+                "average_queue_length": 1.57,
+                "max_queue": 12,
+                "average_speed_kmh": 44.24,
+                "congestion_events": 2652,
+                "teleports": 19,
+                "simulation_duration": 600.0,
+                "scenario": "CHATRAPATI_RING_ROAD",
+                "period_scenario": "EVENING",
+                "seed": 42
+            },
+            "improvements": {
+                "waiting_time_reduction_pct": -486.37,
+                "avg_queue_reduction_pct": -161.67,
+                "max_queue_reduction_pct": -71.43,
+                "throughput_improvement_pct": -9.11,
+                "average_speed_improvement_pct": -21.6
+            }
+        }
+    }
+}

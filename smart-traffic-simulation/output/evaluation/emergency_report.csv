@@ -1,0 +1,4 @@
+Vehicle ID,Type,Route Length (m),Target TLS,Fixed Travel Time (s),Adaptive Travel Time (s),Travel Time Improvement (%),Fixed Wait Time (s),Adaptive Wait Time (s),Wait Time Improvement (%),Fixed Speed (km/h),Adaptive Speed (km/h),Speed Improvement (%)
+AMBULANCE_NAGPUR,ambulance,560.3,cluster_2683490416_2683507646_2683507647_2684658305_#2more,60.0,37.0,38.3%,18.0,0.0,100.0%,33.07,53.68,62.3%
+POLICE_NAGPUR,police,692.9,cluster_2683490405_298938456,68.0,50.0,26.5%,3.0,0.0,100.0%,36.29,48.59,33.9%
+FIRETRUCK_NAGPUR,fire_truck,612.7,cluster_2683490405_298938456,67.0,56.0,16.4%,4.0,2.0,50.0%,32.15,38.1,18.5%
