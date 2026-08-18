@@ -13,6 +13,7 @@ from controller.config import FIXED_RESULTS_CSV, ADAPTIVE_RESULTS_CSV, SCENARIO_
 from controller.simulation_manager import SimulationManager
 from controller.adaptive_controller import AdaptiveTrafficController
 from controller.metrics_exporter import BenchmarkTracker
+from controller.realtime import RealtimeBroadcaster
 
 def get_scenario_bounds(scenario: str, default_max: int = 480) -> tuple:
     """
@@ -28,7 +29,54 @@ def get_scenario_bounds(scenario: str, default_max: int = 480) -> tuple:
     else:
         return (0.0, float(default_max))
 
-def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bool = False, max_steps: int = 480, scenario: str = "all") -> dict:
+# Intersection coordinate lookup for camera centering in SUMO-GUI
+INTERSECTION_GUI_OFFSETS = {
+    "cluster_2683490405_298938456": (1780.0, 1420.0),
+    "joinedS_2705384848_3138462214": (2620.0, 1680.0),
+    "cluster_2683490416_2683507646_2683507647_2684658305_#2more": (980.0, 920.0)
+}
+
+def process_traci_gui_command(cmd: dict, gui: bool = False):
+    """Executes safe TraCI GUI commands (camera tracking, zoom, center view)."""
+    if not gui:
+        return
+    try:
+        import traci
+        views = traci.gui.getIDList()
+        if not views:
+            return
+        view_id = views[0]
+
+        action = cmd.get("command") or cmd.get("action")
+        params = cmd.get("params") or {}
+
+        if action == "set_zoom":
+            zoom = float(params.get("zoom", 300))
+            traci.gui.setZoom(view_id, zoom)
+        elif action == "track_vehicle":
+            vid = str(params.get("vehicle_id", ""))
+            traci.gui.trackVehicle(view_id, vid)
+        elif action == "center_intersection":
+            tls_id = str(params.get("intersection_id", ""))
+            if tls_id in INTERSECTION_GUI_OFFSETS:
+                x, y = INTERSECTION_GUI_OFFSETS[tls_id]
+                traci.gui.setOffset(view_id, x, y)
+                traci.gui.trackVehicle(view_id, "")
+        elif action == "set_schema":
+            schema_name = str(params.get("schema", "real world"))
+            traci.gui.setSchema(view_id, schema_name)
+    except Exception as e:
+        print(f"[TraCI GUI Command] Error applying {cmd}: {e}")
+
+def run_simulation_session(
+    mode: str = "ADAPTIVE",
+    gui: bool = False,
+    use_3d: bool = False,
+    max_steps: int = 480,
+    scenario: str = "all",
+    ws_enabled: bool = True,
+    ws_port: int = None
+) -> dict:
     """
     Executes a simulation session under specified CONTROL_MODE ("FIXED", "ADAPTIVE", or "EMERGENCY_DEMO") and scenario filter.
     Returns aggregated empirical benchmark metrics.
@@ -40,13 +88,21 @@ def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bo
     manager = SimulationManager(gui=gui, use_3d=use_3d)
     controller = AdaptiveTrafficController(enable_emergency=True) if is_adaptive_or_demo else None
     tracker = BenchmarkTracker()
+    broadcaster = RealtimeBroadcaster(port=ws_port, enabled=ws_enabled)
     current_period = None
 
     csv_output_path = ADAPTIVE_RESULTS_CSV if is_adaptive_or_demo else FIXED_RESULTS_CSV
     start_step, end_step = get_scenario_bounds(scenario, max_steps)
 
+    is_paused = False
+    step_delay = 0.02 if gui else 0.0
+    sim_time = 0.0
+    state = {}
+    decisions = {}
+
     try:
         manager.start()
+        broadcaster.start()
         print(f"\n=========================================================================")
         print(f"  RUNNING CONTROL MODE: {mode:<10} | NETWORK: {SCENARIO_NAME:<22} | INDIAN LHT   ")
         print(f"=========================================================================\n")
@@ -54,13 +110,61 @@ def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bo
         step_count = 0
 
         while manager.is_active():
+            # 1. Process incoming WebSocket commands before simulation step
+            pending_cmds = broadcaster.get_pending_commands()
+            for cmd in pending_cmds:
+                action = cmd.get("command") or cmd.get("action")
+                params = cmd.get("params") or {}
+                if action == "pause":
+                    is_paused = True
+                    print("\n>>> Simulation paused via SmartFlow control <<<")
+                elif action == "resume":
+                    is_paused = False
+                    print("\n>>> Simulation resumed via SmartFlow control <<<")
+                elif action == "set_speed" or action == "set_delay":
+                    delay_val = float(params.get("delay", 0.02))
+                    step_delay = max(0.0, min(1.0, delay_val))
+                else:
+                    process_traci_gui_command(cmd, gui=gui)
+
+            # 2. Interactive Pause Wait Loop
+            while is_paused and manager.is_active():
+                if state:
+                    broadcaster.broadcast_state(
+                        sim_time=sim_time,
+                        state=state,
+                        decisions=decisions,
+                        tracker=tracker,
+                        mode=mode_normalized,
+                        status="paused"
+                    )
+                time.sleep(0.05)
+                pause_cmds = broadcaster.get_pending_commands()
+                step_once = False
+                for p_cmd in pause_cmds:
+                    p_action = p_cmd.get("command") or p_cmd.get("action")
+                    p_params = p_cmd.get("params") or {}
+                    if p_action == "resume":
+                        is_paused = False
+                        print("\n>>> Simulation resumed via SmartFlow control <<<")
+                        break
+                    elif p_action == "step":
+                        step_once = True
+                        break
+                    elif p_action == "set_speed" or p_action == "set_delay":
+                        step_delay = max(0.0, min(1.0, float(p_params.get("delay", 0.02))))
+                    else:
+                        process_traci_gui_command(p_cmd, gui=gui)
+                if not is_paused or step_once:
+                    break
+
+            # 3. Advance simulation step
             sim_time = manager.step()
             
             # Spawn test emergency vehicles (ambulance at 50s, police at 150s, firetruck at 250s)
             if controller and hasattr(controller, 'emergency_sys'):
                 controller.emergency_sys.spawn_test_emergency_vehicles(sim_time)
             elif hasattr(manager.aggregator, 'emergency_detector'):
-                # In fixed mode, trigger test vehicles via emergency system
                 pass
 
             if sim_time < start_step:
@@ -86,6 +190,16 @@ def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bo
             manager.aggregator.export_csv(state, csv_path=csv_output_path)
             manager.aggregator.export_json(state)
 
+            # Real-time WebSocket state broadcast
+            broadcaster.broadcast_state(
+                sim_time=sim_time,
+                state=state,
+                decisions=decisions,
+                tracker=tracker,
+                mode=mode_normalized,
+                status="running"
+            )
+
             # Track Period Transition
             period = state["period"]
             if period != current_period:
@@ -104,11 +218,12 @@ def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bo
                 print(f"\nReached target scenario boundary of {end_step}s for scenario '{scenario}'.")
                 break
 
-            if gui:
-                time.sleep(0.02)
+            if step_delay > 0:
+                time.sleep(step_delay)
 
         summary = tracker.generate_benchmark_summary(mode)
         return summary
+
 
     except KeyboardInterrupt:
         print(f"\nKeyboardInterrupt received during '{mode}' mode. Stopping simulation...")
@@ -119,6 +234,7 @@ def run_simulation_session(mode: str = "ADAPTIVE", gui: bool = False, use_3d: bo
         traceback.print_exc()
         return tracker.generate_benchmark_summary(mode)
     finally:
+        broadcaster.stop()
         manager.close()
         print(f"Simulation session for mode '{mode}' finished.")
 
@@ -130,13 +246,23 @@ if __name__ == "__main__":
     parser.add_argument("--3d", action="store_true", dest="use_3d", help="Enable OpenSceneGraph (OSG) 3D Viewport in sumo-gui")
     parser.add_argument("--nogui", action="store_true", help="Launch SUMO in headless mode")
     parser.add_argument("--max-steps", type=int, default=480, help="Maximum simulation steps")
+    parser.add_argument("--ws-port", type=int, default=None, help="WebSocket broadcaster port (default: 8765)")
+    parser.add_argument("--no-ws", action="store_true", help="Disable WebSocket broadcaster")
     args = parser.parse_args()
 
     use_gui = True if (args.gui or args.use_3d) else False
     if args.nogui:
         use_gui = False
 
-    metrics = run_simulation_session(mode=args.mode, gui=use_gui, use_3d=args.use_3d, max_steps=args.max_steps, scenario=args.scenario)
+    metrics = run_simulation_session(
+        mode=args.mode,
+        gui=use_gui,
+        use_3d=args.use_3d,
+        max_steps=args.max_steps,
+        scenario=args.scenario,
+        ws_enabled=not args.no_ws,
+        ws_port=args.ws_port
+    )
     print(f"\n--- SESSION METRICS SUMMARY ({args.mode} | {args.scenario.upper()}) ---")
     for k, v in metrics.items():
         print(f"  {k:<26}: {v}")

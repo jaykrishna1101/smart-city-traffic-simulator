@@ -1,13 +1,13 @@
 {
     "scenario": "CHATRAPATI_RING_ROAD",
-    "simulation_time": 480.0,
+    "simulation_time": 276.0,
     "period": "EVENING_PEAK",
     "intersections": {
         "cluster_2683490405_298938456": {
             "intersection_id": "cluster_2683490405_298938456",
             "signal_phase": 0,
             "phase_state": "GGggGGGrrr",
-            "phase_remaining": 0.0,
+            "phase_remaining": 5.0,
             "controlled_lanes": [
                 "1212699691#3_0",
                 "1212699691#3_1",
@@ -43,32 +43,32 @@
                     "waiting_time": 0.0,
                     "speed": 27.78,
                     "speed_kmh": 100.01,
-                    "traffic_flow": 0,
+                    "traffic_flow": -1,
                     "congestion": "LOW",
                     "edge_id": "372646899#19"
                 },
                 "304646594#1": {
-                    "vehicles": 0,
-                    "queue": 0,
-                    "waiting_time": 0.0,
-                    "speed": 22.22,
-                    "speed_kmh": 79.99,
+                    "vehicles": 2,
+                    "queue": 1,
+                    "waiting_time": 2.0,
+                    "speed": 10.56,
+                    "speed_kmh": 38.02,
                     "traffic_flow": 0,
                     "congestion": "LOW",
                     "edge_id": "304646594#1"
                 }
             },
-            "total_vehicles": 0,
-            "total_queue": 0,
-            "average_waiting_time": 0.0,
-            "average_speed": 25.93,
-            "average_speed_kmh": 93.35
+            "total_vehicles": 2,
+            "total_queue": 1,
+            "average_waiting_time": 0.67,
+            "average_speed": 22.04,
+            "average_speed_kmh": 79.34
         },
         "cluster_2683490416_2683507646_2683507647_2684658305_#2more": {
             "intersection_id": "cluster_2683490416_2683507646_2683507647_2684658305_#2more",
             "signal_phase": 0,
             "phase_state": "GGGrrrrrrrrrrrrrrrGGGGrrrrrrrr",
-            "phase_remaining": 23.0,
+            "phase_remaining": 0.0,
             "controlled_lanes": [
                 "304334916#4_0",
                 "304334916#4_1",
@@ -98,23 +98,23 @@
             "controlled_links_count": 30,
             "approaches": {
                 "304334916#4": {
-                    "vehicles": 2,
-                    "queue": 2,
-                    "waiting_time": 89.5,
-                    "speed": 9.26,
-                    "speed_kmh": 33.34,
-                    "traffic_flow": 0,
-                    "congestion": "SEVERE",
-                    "edge_id": "304334916#4"
-                },
-                "262683844#4": {
                     "vehicles": 0,
                     "queue": 0,
                     "waiting_time": 0.0,
-                    "speed": 11.11,
-                    "speed_kmh": 40.0,
-                    "traffic_flow": 0,
+                    "speed": 27.78,
+                    "speed_kmh": 100.01,
+                    "traffic_flow": -1,
                     "congestion": "LOW",
+                    "edge_id": "304334916#4"
+                },
+                "262683844#4": {
+                    "vehicles": 2,
+                    "queue": 2,
+                    "waiting_time": 45.5,
+                    "speed": 3.7,
+                    "speed_kmh": 13.32,
+                    "traffic_flow": 0,
+                    "congestion": "SEVERE",
                     "edge_id": "262683844#4"
                 },
                 "27116790#3": {
@@ -128,37 +128,37 @@
                     "edge_id": "27116790#3"
                 },
                 "372646899#12": {
-                    "vehicles": 6,
-                    "queue": 6,
-                    "waiting_time": 71.67,
-                    "speed": 0.0,
-                    "speed_kmh": 0.0,
+                    "vehicles": 4,
+                    "queue": 4,
+                    "waiting_time": 77.0,
+                    "speed": 5.56,
+                    "speed_kmh": 20.02,
                     "traffic_flow": 0,
                     "congestion": "SEVERE",
                     "edge_id": "372646899#12"
                 },
                 "27117517#9": {
-                    "vehicles": 0,
-                    "queue": 0,
-                    "waiting_time": 0.0,
-                    "speed": 11.11,
-                    "speed_kmh": 40.0,
+                    "vehicles": 1,
+                    "queue": 1,
+                    "waiting_time": 10.0,
+                    "speed": 5.56,
+                    "speed_kmh": 20.02,
                     "traffic_flow": 0,
-                    "congestion": "LOW",
+                    "congestion": "MEDIUM",
                     "edge_id": "27117517#9"
                 }
             },
-            "total_vehicles": 8,
-            "total_queue": 8,
-            "average_waiting_time": 32.23,
-            "average_speed": 11.85,
-            "average_speed_kmh": 42.66
+            "total_vehicles": 7,
+            "total_queue": 7,
+            "average_waiting_time": 26.5,
+            "average_speed": 14.08,
+            "average_speed_kmh": 50.69
         },
         "joinedS_2705384848_3138462214": {
             "intersection_id": "joinedS_2705384848_3138462214",
             "signal_phase": 0,
             "phase_state": "GggGGgrrrGGgrrrGgg",
-            "phase_remaining": 0.0,
+            "phase_remaining": 11.0,
             "controlled_lanes": [
                 "-1274948100_0",
                 "27168100#6_0",
@@ -253,5 +253,18 @@
             "average_speed_kmh": 74.99
         }
     },
-    "emergency_vehicles": []
+    "emergency_vehicles": [
+        {
+            "vehicle_id": "FIRETRUCK_NAGPUR",
+            "type": "fire_truck",
+            "edge_id": "29104200#3",
+            "lane_id": "29104200#3_0",
+            "speed_m_s": 16.39,
+            "speed_kmh": 58.99,
+            "position": 59.32,
+            "next_tls": "cluster_2683490405_298938456",
+            "distance_to_tls": 190.58,
+            "approach_lane": "29104200#3_0"
+        }
+    ]
 }

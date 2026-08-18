@@ -2,3 +2,5 @@
 # Note: traci and sumolib are also bundled with SUMO installation in SUMO_HOME/tools
 traci>=1.20.0
 sumolib>=1.20.0
+websockets>=12.0.0
+websockify>=0.12.0

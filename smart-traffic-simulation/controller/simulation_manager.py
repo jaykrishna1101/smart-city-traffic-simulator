@@ -33,6 +33,11 @@ class SimulationManager:
             sumo_binary = "sumo-gui" if self.gui else "sumo"
 
         cmd = [sumo_binary, "-c", self.config_path, "--no-warnings", "true"]
+        if self.gui:
+            # Fix window position and size so sumo_window_vnc.py can reliably locate the HWND.
+            # Place at top-left (0,0) with a consistent resolution. User can move it later;
+            # the VNC server tracks position changes dynamically via GetWindowRect.
+            cmd += ["--window-pos", "0,0", "--window-size", "1280,720"]
         if self.gui and self.use_3d:
             cmd.append("--osg-view")
 

@@ -19,6 +19,8 @@ def main():
     parser.add_argument("--nogui", action="store_true", help="Launch SUMO in headless mode (sumo)")
     parser.add_argument("--compare", action="store_true", help="Execute Fixed vs Adaptive benchmark comparison")
     parser.add_argument("--max-steps", type=int, default=480, help="Maximum simulation steps")
+    parser.add_argument("--ws-port", type=int, default=None, help="WebSocket broadcaster port (default: 8765)")
+    parser.add_argument("--no-ws", action="store_true", help="Disable WebSocket broadcaster")
 
     args = parser.parse_args()
 
@@ -30,7 +32,16 @@ def main():
         run_fixed_vs_adaptive_benchmark(gui=use_gui, max_steps=args.max_steps)
     else:
         mode_upper = args.mode.upper()
-        run_simulation_session(mode=mode_upper, gui=use_gui, use_3d=args.use_3d, max_steps=args.max_steps, scenario=args.scenario)
+        run_simulation_session(
+            mode=mode_upper,
+            gui=use_gui,
+            use_3d=args.use_3d,
+            max_steps=args.max_steps,
+            scenario=args.scenario,
+            ws_enabled=not args.no_ws,
+            ws_port=args.ws_port
+        )
 
 if __name__ == "__main__":
     main()
+
